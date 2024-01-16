@@ -3,7 +3,7 @@ import os
 
 list = {}
 
-for root, dirs, files in os.walk("C:\\Users\\alexs\\Documents\\Code\\Detection Engineering\\detection-engineering\\detections"):
+for root, dirs, files in os.walk("detections/"):
     for file in files:
         if file.endswith(".toml"):
             full_path = os.path.join(root, file)
@@ -41,7 +41,7 @@ for root, dirs, files in os.walk("C:\\Users\\alexs\\Documents\\Code\\Detection E
                 obj = {'name': name, 'date': date, 'author': author, 'risk_score': risk_score, 'severity': severity, 'mitre': filtered_object_array}
                 list[file] = obj
 
-output_path = "C:\\Users\\alexs\\Documents\\Code\\Detection Engineering\\detection-engineering\\metrics\\detectiondata.csv"
+output_path = "detections/detectiondata.csv"
 
 outF = open(output_path, "w")
 outF.write("name,date,author,risk_score,severity,tactic,technique,subtechnique\n")
