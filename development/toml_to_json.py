@@ -46,9 +46,7 @@ for root, dirs, files in os.walk("C:\\Users\\alexs\\Documents\\Code\\Detection E
                     elif type(alert['rule'][field]) == dict:
                         data += "  " + "\"" + field + "\": " + str(alert['rule'][field]).replace("'","\"") + "," + "\n"
                         
-            data += "  \"enabled\": true\n}"
-       
-        print(data)                     
+            data += "  \"enabled\": true\n}"                
                     
         elastic_data = requests.post(url, headers=headers, data=data).json()
         print(elastic_data)
