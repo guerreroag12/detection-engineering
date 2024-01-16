@@ -10,6 +10,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          pyhton-version: '3.11.4'
 
       - run: |
           python development/validation.py
