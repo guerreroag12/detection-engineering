@@ -7,6 +7,8 @@ headers = {
     'accept': 'application/json'
 }
 
+failure = 0
+
 mitreData = requests.get(url, headers=headers).json()
 mitreMapped = {}
 
@@ -76,18 +78,21 @@ for file in alert_data:
         
         if tactic not in mitre_tactic_list:
             print(f'The MITRE Tactic supplied does not exist: "{tactic}" in {file}')
+            failure = 1
         
         try:
             if mitreMapped[technique_id]:
                 pass
         except KeyError:
             print(f'Invalid Mitre Technique ID: "{technique_id} in {file}')
+            failure = 1
             
         try:
             mitre_name = mitreMapped[technique_id]['name'] 
             alert_name = line['technique_name']
             if alert_name != mitre_name:
                 print(f'MITRE Technique ID and Name Mismatch in {file} EXPECTED {mitre_name} GIVEN: {alert_name}  ')
+                failure = 1
         except KeyError:
                 pass            
         
@@ -97,12 +102,17 @@ for file in alert_data:
                 alert_name = line['subtechnique_name']
                 if alert_name != mitre_name:
                     print(f'MITRE Sub-Technique ID and Name Mismatch in {file} EXPECTED {mitre_name} GIVEN: {alert_name}  ')
+                    failure = 1
         except KeyError:
             pass
         
         try:
             if mitreMapped[technique_id]['deprecated'] == True:
                 print(f'Deprecated MITRE Technique ID: {technique_id} in file: {file}')
+                failure = 1
         except KeyError:
             pass
                         
+if failure != 0:
+    sys.exit(1)
+    

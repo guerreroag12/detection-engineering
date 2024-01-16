@@ -6,7 +6,9 @@ import os
 #with open(file,"rb") as toml:
 #alert = tomllib.load(toml)
 
-for root, dirs, files in os.walk("C:\\Users\\alexs\\Documents\\Code\\Detection Engineering\\converted_detections"):
+failure = 0
+
+for root, dirs, files in os.walk("detections/"):
     for file in files:
         if file.endswith(".toml"):
             full_path = os.path.join(root, file)
@@ -36,5 +38,10 @@ for root, dirs, files in os.walk("C:\\Users\\alexs\\Documents\\Code\\Detection E
                         
                 if missing_fields:
                     print(f'The following fields do not exist in {file}: {missing_fields}')
+                    failure = 1
                 else: 
                     print(f"Validation passed for: {file}!")
+
+if failure != 0:
+    sys.exit(1)
+    
