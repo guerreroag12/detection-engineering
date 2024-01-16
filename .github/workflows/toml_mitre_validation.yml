@@ -10,7 +10,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.4'
 
-        run: |
+      - run: |
+          pip install requests
           python development/validation.py
           python development/mitre.py
