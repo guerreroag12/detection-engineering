@@ -12,7 +12,7 @@ headers = {
 
 data = ""
 
-for root, dirs, files in os.walk("C:\\Users\\alexs\\Documents\\Code\\Detection Engineering\\converted_detections"):
+for root, dirs, files in os.walk("detections/"):
     for file in files:
         data = "{\n"
         if file.endswith(".toml"):
