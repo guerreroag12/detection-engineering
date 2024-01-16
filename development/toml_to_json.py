@@ -2,7 +2,7 @@ import requests
 import os
 import tomllib
 
-api_key = os.environ["ELASTIC_KEY"]
+api_key = os.environ['ELASTIC_KEY']
 url = "https://e09ed533d99a47d2b65a4c0e1f7b0e16.us-central1.gcp.cloud.es.io:9243/api/detection_engine/rules"
 headers = {
     'Content-Type': 'application/json;charset=UTF-8',
@@ -12,7 +12,7 @@ headers = {
 
 data = ""
 
-for root, dirs, files in os.walk("C:\\Users\\alexs\\Documents\\Code\\Detection Engineering\\converted_detections"):
+for root, dirs, files in os.walk("detections/"):
     for file in files:
         data = "{\n"
         if file.endswith(".toml"):
