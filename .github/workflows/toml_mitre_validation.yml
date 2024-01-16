@@ -2,10 +2,11 @@
 name: TOML and Mitre Validation
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
-  build:
+  TOML-Mitre-Validation:
     runs-on: ubuntu-latest
 
     steps:
